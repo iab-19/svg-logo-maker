@@ -12,7 +12,26 @@
   - Why did you build this project?
   - What problem did it solve?
   - What did you learn? -->
+### User Story
+AS a freelance web developer  
+I WANT to generate a simple logo for my projects  
+SO THAT I don't have to pay a graphic designer
 
+### Acceptance Criteria
+GIVEN a command-line application that accepts user input  
+WHEN I am prompted for text  
+THEN I can enter up to three characters  
+WHEN I am prompter for the text color  
+THEN I can enter a color keyword (OR a hexadecimal number)  
+WHEN I am prompted for a shape  
+THEN I am presented with a list of shapes to choose from: circle, triangle, and square  
+WHEN I am prompted for the shapes's color  
+THEN I can enter a color keyword (OR a hexadecial number)  
+WHEN I have entered input for all the prompts  
+THEN an SVG file is creaded named 'logo.svg'  
+AND the output text "Generated logo.svg" is printed in the command line  
+WHEN I open the 'logo.svg' file in a browser  
+THEN I am shown a 300x200 pixel image that matches the criteria I entered
   ## Table of Contents
 
   <!-- Add a table of contents to make it easy for users to find what they need -->
