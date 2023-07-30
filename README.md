@@ -73,7 +73,9 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
   industry standard, but you can always write your own.-->
 
   ## Tests
-  
+  Tests were run using jest and the command line. One test that was run was the generating of shapes, a function was written that takes in the shape and color of
+  the shape. Depending on the inputs, the selected shape was generated with the specified color. An orange circle with the letters 'DBZ' was created: ![DBZ](examples/DBZ.svg)
+
 
   <!-- Go the extra mile and write tests for your application. Then provide examples on how to run them here. -->
 
