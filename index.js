@@ -1,6 +1,6 @@
 const fs = require('fs'); // Allow use of file system modules
 const inquirer = require('inquirer'); // Allow use of inquirer
-const {Shape, Triangle, Circle, Square, Pentagon} = require('./lib/shapes'); // Import shapes.js file
+const {Shape, Triangle, Circle, Square, Pentagon, Hexagon} = require('./lib/shapes'); // Import shapes.js file
 
 
 // And array of questions for the user
@@ -8,12 +8,11 @@ const questions = ['1. Enter text for your logo(Max 3 characters)',
 '2. What color do you want the text to be?(hex values supported)',
 '3. What shape do you want your logo to be?',
 '4. What color do you want your shape to be?(hex values supported)',
-'1. Please enter 3 characters or less'
 ];
 
-const shapeChoiches = ['Circle', 'Triangle', 'Square', 'Pentagon'];
+const shapeChoiches = ['Circle', 'Triangle', 'Square', 'Pentagon', 'Hexagon'];
 
-const moreShapes = ['Hexagon', 'Heptagon', 'Octagon'];
+const moreShapes = ['Heptagon', 'Octagon'];
 
 inquirer
     .prompt([
@@ -34,7 +33,7 @@ inquirer
             message: questions[2],
             name: 'shape',
             // Gives the user choices from the 'shapeChoices' array
-            choices: [shapeChoiches[0], shapeChoiches[1],shapeChoiches[2],shapeChoiches[3],]
+            choices: [shapeChoiches[0], shapeChoiches[1],shapeChoiches[2],shapeChoiches[3], shapeChoiches[4]]
         },
         {
             type: 'input',
@@ -69,29 +68,34 @@ function generateFile(shape, fill, text, textFill) {
     let choice;
     switch(shape){
         case 'Circle':
-            const circleInstance = new Circle();
+            const newCircle = new Circle();
             choice =
-    `${circleInstance.generateShape(fill)}
-     ${circleInstance.generateText(text, textFill)}`;
+    `${newCircle.generateShape(fill)}
+     ${newCircle.generateText(text, textFill)}`;
             break;
         case 'Triangle':
-            const triangleInstance = new Triangle();
+            const newTriangle = new Triangle();
             choice =
-    `${triangleInstance.generateShape(fill)}
-     ${triangleInstance.generateText(text, textFill)}`;
+    `${newTriangle.generateShape(fill)}
+     ${newTriangle.generateText(text, textFill)}`;
             break;
         case 'Square':
-            const squareInstance = new Square();
+            const newSquare = new Square();
             choice =
-    `${squareInstance.generateShape(fill)}
-     ${squareInstance.generateText(text, textFill)}`;
+    `${newSquare.generateShape(fill)}
+     ${newSquare.generateText(text, textFill)}`;
             break;
         case 'Pentagon':
-            const pentagonInstance = new Pentagon();
+            const newPentagon = new Pentagon();
             choice =
-    `${pentagonInstance.generateShape(fill)}
-     ${pentagonInstance.generateText(text, textFill)}`;
+    `${newPentagon.generateShape(fill)}
+     ${newPentagon.generateText(text, textFill)}`;
             break;
+        case 'Hexagon':
+            const newHexagon = new Hexagon();
+            choice =
+    `${newHexagon.generateShape(fill)}
+     ${newHexagon.generateText(text, textFill)}`;
     }
     return choice;
 }
