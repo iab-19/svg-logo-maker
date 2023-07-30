@@ -13,23 +13,17 @@ const questions = ['1. Enter text for your logo(Max 3 characters)',
 
 const shapeChoiches = ['Circle', 'Triangle', 'Square', 'Pentagon'];
 
-const moreShapes = ['Hexagon', 'Heptagon', 'Octagon']
+const moreShapes = ['Hexagon', 'Heptagon', 'Octagon'];
 
 inquirer
     .prompt([
+        // Promt the user for a question from the 'questions' array and saves the answer
+        // in the corresponding variable
         {
             type: 'input',
             message: questions[0],
             name: 'text',
         },
-        // {
-        //     type: 'input',
-        //     message: questions[4],
-        //     name: 'text',
-        //     when: function(data.text.length > 3) {
-        //         return text;
-        //     };
-        // },
         {
             type: 'input',
             message: questions[1],
@@ -39,6 +33,7 @@ inquirer
             type: 'list',
             message: questions[2],
             name: 'shape',
+            // Gives the user choices from the 'shapeChoices' array
             choices: [shapeChoiches[0], shapeChoiches[1],shapeChoiches[2],shapeChoiches[3],]
         },
         {
@@ -47,6 +42,8 @@ inquirer
             name: 'shapeColor',
         },
     ])
+    // generates an svg file in the folder 'examples' with the filename of 'logo.svg' with the data
+    // taken from the user input
     .then((data) => {
         let svg = generateSVG(data);
         fs.writeFile('./examples/logo.svg', svg, (err) =>
@@ -56,7 +53,7 @@ inquirer
     })
 
 
-
+// A function that generates the svg file data
 function generateSVG(data) {
     return `
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
@@ -66,6 +63,8 @@ ${generateFile(data.shape, data.shapeColor, data.text, data.textColor)}
     `
 }
 
+// Depending on the shape chosen, this function will generate a shape
+// with the specified color, text, and text color
 function generateFile(shape, fill, text, textFill) {
     let choice;
     switch(shape){
@@ -96,44 +95,3 @@ function generateFile(shape, fill, text, textFill) {
     }
     return choice;
 }
-
-// generates code depending on the shape chosen from the user
-// function generateShape(shape, shapeColor, text, textColor){
-//     let choice;
-//     switch (shape){
-//         // When circle is chosen, part of the svg file is generated that makes
-//         // a circle with
-//         case 'Circle':
-//             choice =`
-//     <circle cx = "150" cy = "100" r = "99" fill = "${shapeColor}" />
-//     <text x="150" y="125" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
-//             break;
-//         case 'Triangle':
-//             choice =`
-//     <polygon opacity="1" fill="${shapeColor}" points="20,200,150,0,280,200"/>
-//     <text x="150" y="180" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
-//             break;
-//         case 'Square':
-//             choice =`
-//     <rect x="50" y="0" width="200" height="200" fill="${shapeColor}" />
-//     <text x="150" y="120" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
-//             break;
-//         case 'Pentagon':
-//             choice =`
-//     <polygon opacity="1" fill="${shapeColor}" points="150,0,260,80,230,200,70,200,40,80"/>
-//     <text x="150" y="130" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
-//             break;
-//         // case 'Hexagon':
-//         //     choice = ``;
-//         //     break;
-//         // case 'Heptagon':
-//         //     choice = ``;
-//         //     break;
-//         // case 'Octagon':
-//         //     choice = ``;
-//         //     break;
-//         default:
-//             choice = ``;
-//     }
-//     return choice;
-// }
