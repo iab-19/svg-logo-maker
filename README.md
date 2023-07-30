@@ -84,3 +84,5 @@ THEN I am shown a 300x200 pixel image that matches the criteria I entered
 
   If you have any questions, please reach out to me via email: iab.jr10@gmail.com.
 
+## Other
+Link to walkthrough video: https://drive.google.com/file/d/1DbHigt2WdxBa_eGRO58m0Af9z9DmoaPf/view
