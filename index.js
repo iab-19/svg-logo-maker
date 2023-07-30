@@ -1,6 +1,6 @@
 const fs = require('fs'); // Allow use of file system modules
 const inquirer = require('inquirer'); // Allow use of inquirer
-const shape = require('./lib/shapes'); // Import shapes.js file
+const {Shape, Triangle, Circle, Square, Pentagon} = require('./lib/shapes'); // Import shapes.js file
 
 
 // And array of questions for the user
@@ -11,8 +11,9 @@ const questions = ['1. Enter text for your logo(Max 3 characters)',
 '1. Please enter 3 characters or less'
 ];
 
-const shapeChoiches = ['Circle', 'Triangle', 'Square', 'Hexagon', 'Pentagon',
-'Heptagon', 'Octagon'];
+const shapeChoiches = ['Circle', 'Triangle', 'Square', 'Pentagon'];
+
+const moreShapes = ['Hexagon', 'Heptagon', 'Octagon']
 
 inquirer
     .prompt([
@@ -38,8 +39,7 @@ inquirer
             type: 'list',
             message: questions[2],
             name: 'shape',
-            choices: [shapeChoiches[0], shapeChoiches[1],shapeChoiches[2],shapeChoiches[3],
-            shapeChoiches[4], shapeChoiches[5], shapeChoiches[6]]
+            choices: [shapeChoiches[0], shapeChoiches[1],shapeChoiches[2],shapeChoiches[3],]
         },
         {
             type: 'input',
@@ -60,49 +60,80 @@ inquirer
 function generateSVG(data) {
     return `
 <svg xmlns="http://www.w3.org/2000/svg" width="300" height="200">
-  ${generateShape(data.shape, data.shapeColor, data.text, data.textColor)}
+${generateFile(data.shape, data.shapeColor, data.text, data.textColor)}
 </svg>
 
     `
 }
 
-// generates code depending on the shape chosen from the user
-function generateShape(shape, shapeColor, text, textColor){
+function generateFile(shape, fill, text, textFill) {
     let choice;
-    switch (shape){
-        // When circle is chosen, part of the svg file is generated that makes
-        // a circle with
+    switch(shape){
         case 'Circle':
-            choice =`
-    <circle cx = "150" cy = "100" r = "99" fill = "${shapeColor}" />
-    <text x="150" y="125" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
+            const circleInstance = new Circle();
+            choice =
+    `${circleInstance.generateShape(fill)}
+     ${circleInstance.generateText(text, textFill)}`;
             break;
         case 'Triangle':
-            choice =`
-    <polygon id="triangle2" opacity="1" fill="${shapeColor}" points="20,200,150,0,280,200"/>
-    <text x="150" y="180" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
+            const triangleInstance = new Triangle();
+            choice =
+    `${triangleInstance.generateShape(fill)}
+     ${triangleInstance.generateText(text, textFill)}`;
             break;
         case 'Square':
-            choice =`
-    <rect id="square" x="50" y="0" width="200" height="200" fill="${shapeColor}" />
-    <text x="150" y="120" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
+            const squareInstance = new Square();
+            choice =
+    `${squareInstance.generateShape(fill)}
+     ${squareInstance.generateText(text, textFill)}`;
             break;
         case 'Pentagon':
-            choice =`
-    <polygon opacity="1" fill="${shapeColor}" points="150,0,260,80,230,200,70,200,40,80"/>
-    <text x="150" y="130" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
+            const pentagonInstance = new Pentagon();
+            choice =
+    `${pentagonInstance.generateShape(fill)}
+     ${pentagonInstance.generateText(text, textFill)}`;
             break;
-        // case 'Hexagon':
-        //     choice = ``;
-        //     break;
-        // case 'Heptagon':
-        //     choice = ``;
-        //     break;
-        // case 'Octagon':
-        //     choice = ``;
-        //     break;
-        default:
-            choice = ``;
     }
     return choice;
 }
+
+// generates code depending on the shape chosen from the user
+// function generateShape(shape, shapeColor, text, textColor){
+//     let choice;
+//     switch (shape){
+//         // When circle is chosen, part of the svg file is generated that makes
+//         // a circle with
+//         case 'Circle':
+//             choice =`
+//     <circle cx = "150" cy = "100" r = "99" fill = "${shapeColor}" />
+//     <text x="150" y="125" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
+//             break;
+//         case 'Triangle':
+//             choice =`
+//     <polygon opacity="1" fill="${shapeColor}" points="20,200,150,0,280,200"/>
+//     <text x="150" y="180" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
+//             break;
+//         case 'Square':
+//             choice =`
+//     <rect x="50" y="0" width="200" height="200" fill="${shapeColor}" />
+//     <text x="150" y="120" text-anchor="middle" fill="${textColor}" font-size="65">${text}</text>`;
+//             break;
+//         case 'Pentagon':
+//             choice =`
+//     <polygon opacity="1" fill="${shapeColor}" points="150,0,260,80,230,200,70,200,40,80"/>
+//     <text x="150" y="130" text-anchor="middle" fill="${textColor}" font-size="70">${text}</text>`;
+//             break;
+//         // case 'Hexagon':
+//         //     choice = ``;
+//         //     break;
+//         // case 'Heptagon':
+//         //     choice = ``;
+//         //     break;
+//         // case 'Octagon':
+//         //     choice = ``;
+//         //     break;
+//         default:
+//             choice = ``;
+//     }
+//     return choice;
+// }
